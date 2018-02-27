@@ -5,11 +5,10 @@
  */
 package com.cashow.modularizationdemo.userlist;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cashow.modularizationdemo.R;
 import com.cashow.modularizationdemo.common.activity.BaseActivity;
 import com.cashow.modularizationdemo.common.di.HasComponent;
@@ -20,12 +19,9 @@ import com.cashow.modularizationdemo.common.model.UserModel;
 /**
  * Activity that shows a list of Users.
  */
+@Route(path = "/userlist/activity")
 public class UserListActivity extends BaseActivity implements HasComponent<UserComponent>,
         UserListFragment.UserListListener {
-
-    public static Intent getCallingIntent(Context context) {
-        return new Intent(context, UserListActivity.class);
-    }
 
     private UserComponent userComponent;
 

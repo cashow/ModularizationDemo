@@ -16,10 +16,8 @@
 package com.cashow.modularizationdemo.common.navigation;
 
 import android.content.Context;
-import android.content.Intent;
 
-import com.cashow.modularizationdemo.userdetails.UserDetailsActivity;
-import com.cashow.modularizationdemo.userlist.UserListActivity;
+import com.alibaba.android.arouter.launcher.ARouter;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -42,8 +40,7 @@ public class Navigator {
      */
     public void navigateToUserList(Context context) {
         if (context != null) {
-            Intent intentToLaunch = UserListActivity.getCallingIntent(context);
-            context.startActivity(intentToLaunch);
+            ARouter.getInstance().build("/userlist/activity").navigation(context);
         }
     }
 
@@ -54,8 +51,9 @@ public class Navigator {
      */
     public void navigateToUserDetails(Context context, int userId) {
         if (context != null) {
-            Intent intentToLaunch = UserDetailsActivity.getCallingIntent(context, userId);
-            context.startActivity(intentToLaunch);
+            ARouter.getInstance().build("/userdetail/activity")
+                    .withInt("userId", userId)
+                    .navigation(context);
         }
     }
 }

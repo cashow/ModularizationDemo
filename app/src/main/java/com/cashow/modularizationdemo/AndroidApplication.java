@@ -17,9 +17,9 @@ package com.cashow.modularizationdemo;
 
 import android.app.Application;
 
-import com.cashow.modularizationdemo.di.components.ApplicationComponent;
-import com.cashow.modularizationdemo.di.components.DaggerApplicationComponent;
-import com.cashow.modularizationdemo.di.modules.ApplicationModule;
+import com.cashow.modularizationdemo.common.di.components.ApplicationComponent;
+import com.cashow.modularizationdemo.common.di.components.DaggerApplicationComponent;
+import com.cashow.modularizationdemo.common.di.modules.ApplicationModule;
 
 /**
  * Android Main Application

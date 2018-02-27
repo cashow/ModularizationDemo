@@ -5,9 +5,15 @@ buildscript {
         jcenter()
         mavenCentral()
         google()
+        // TODO remove after butterknife 9 graduates to stable
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0'
+        // TODO Upgrade to 9.0.0 when released and use ${butterknife_version}
+        // Needed because 8.8.1 plugin is not compatible with Android Plugin 3.x:
+        // https://github.com/JakeWharton/butterknife/issues/1130
+        classpath "com.jakewharton:butterknife-gradle-plugin:9.0.0-SNAPSHOT"
     }
 }
 
@@ -16,6 +22,7 @@ allprojects {
         jcenter()
         mavenCentral()
         google()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     ext {
         androidApplicationId = 'com.cashow.cleanmvpdemo'

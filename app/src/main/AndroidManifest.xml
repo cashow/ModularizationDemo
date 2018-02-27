@@ -20,14 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".userlist.UserListActivity"
-            android:label="@string/activity_title_user_list"></activity>
-
-        <activity
-            android:name=".userdetails.UserDetailsActivity"
-            android:label="@string/activity_title_user_details"></activity>
     </application>
 
 </manifest>

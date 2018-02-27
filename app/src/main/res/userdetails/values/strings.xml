@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="view_text_email">Email:</string>
-  <string name="view_text_followers">Followers:</string>
-  <string name="view_text_description">Description:</string>
-</resources>

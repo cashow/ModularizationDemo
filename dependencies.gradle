@@ -13,7 +13,7 @@ ext {
 
     //Libraries
     daggerVersion = '2.8'
-    butterKnifeVersion = '8.8.1'
+    butterKnifeVersion = '9.0.0-SNAPSHOT'
     recyclerViewVersion = '26.1.0'
     rxJavaVersion = '2.0.2'
     rxAndroidVersion = '2.0.1'
@@ -73,6 +73,22 @@ ext {
             dependencies.arrow,
     ]
     domain_annotation_dependencies = [
+    ]
+
+    userlist_dependencies = [
+    ]
+    userlist_annotation_dependencies = [
+            dependencies.daggerCompiler,
+            dependencies.butterKnifeCompiler,
+            dependencies.arouterCompiler,
+    ]
+
+    userdetails_dependencies = [
+    ]
+    userdetails_annotation_dependencies = [
+            dependencies.daggerCompiler,
+            dependencies.butterKnifeCompiler,
+            dependencies.arouterCompiler,
     ]
 
     baselibrary_dependencies = [

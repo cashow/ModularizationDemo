@@ -22,9 +22,20 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    def listSubFile = {
+        def resFolder = 'src/main/res'
+        def files = file(resFolder).listFiles()
+        def folders = []
+        files.each {
+            item -> folders.add(item.absolutePath)
+        }
+        folders.add(file(resFolder))
+        return folders
+    }
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
+            res.srcDirs += listSubFile()
         }
     }
     packagingOptions {

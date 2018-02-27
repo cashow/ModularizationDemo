@@ -21,9 +21,10 @@ android {
 }
 
 dependencies {
-    def dependencies = rootProject.ext.dependencies
-
-    implementation dependencies.javaxInject
-    implementation dependencies.rxJava
-    implementation dependencies.arrow
+    rootProject.ext.domain_dependencies.each {
+        item -> implementation item
+    }
+    rootProject.ext.domain_annotation_dependencies.each {
+        item -> annotationProcessor item
+    }
 }

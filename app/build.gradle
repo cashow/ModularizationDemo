@@ -56,22 +56,15 @@ android {
 }
 
 dependencies {
-    def dependencies = rootProject.ext.dependencies
-
     implementation project(':domain')
     implementation project(':data')
 
-    annotationProcessor dependencies.daggerCompiler
-    implementation dependencies.dagger
-    implementation dependencies.butterKnife
-    implementation dependencies.recyclerView
-    implementation dependencies.rxJava
-    implementation dependencies.rxAndroid
-    annotationProcessor dependencies.butterKnifeCompiler
-    implementation dependencies.arrow
-
-    //Development
-    implementation dependencies.leakCanary
+    rootProject.ext.app_dependencies.each {
+        item -> implementation item
+    }
+    rootProject.ext.app_annotation_dependencies.each {
+        item -> annotationProcessor item
+    }
 }
 
 repositories {

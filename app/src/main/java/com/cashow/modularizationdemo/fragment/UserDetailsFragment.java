@@ -14,16 +14,11 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.cashow.domain.User;
-import com.cashow.domain.exception.DefaultErrorBundle;
-import com.cashow.domain.exception.ErrorBundle;
-import com.cashow.domain.interactor.DefaultObserver;
-import com.cashow.domain.interactor.GetUserDetails;
 import com.cashow.modularizationdemo.R;
 import com.cashow.modularizationdemo.di.components.UserComponent;
-import com.cashow.modularizationdemo.exception.ErrorMessageFactory;
-import com.cashow.modularizationdemo.mapper.UserModelDataMapper;
 import com.cashow.modularizationdemo.model.UserModel;
+import com.cashow.modularizationdemo.presenter.UserDetailsPresenter;
+import com.cashow.modularizationdemo.view.UserDetailsView;
 import com.cashow.modularizationdemo.widget.AutoLoadImageView;
 import com.fernandocejas.arrow.checks.Preconditions;
 
@@ -37,7 +32,11 @@ import butterknife.Unbinder;
 /**
  * Fragment that shows details of a certain user.
  */
-public class UserDetailsFragment extends BaseFragment {
+public class UserDetailsFragment extends BaseFragment implements UserDetailsView {
+    private static final String PARAM_USER_ID = "param_user_id";
+
+    @Inject
+    UserDetailsPresenter userDetailsPresenter;
 
     @BindView(R.id.iv_cover)
     AutoLoadImageView iv_cover;
@@ -56,14 +55,7 @@ public class UserDetailsFragment extends BaseFragment {
     @BindView(R.id.bt_retry)
     Button bt_retry;
 
-    @Inject
-    GetUserDetails getUserDetailsUseCase;
-    @Inject
-    UserModelDataMapper userModelDataMapper;
-
     private Unbinder unbinder;
-
-    private static final String PARAM_USER_ID = "param_user_id";
 
     public static UserDetailsFragment forUser(int userId) {
         final UserDetailsFragment userDetailsFragment = new UserDetailsFragment();
@@ -94,9 +86,22 @@ public class UserDetailsFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        userDetailsPresenter.setView(this);
         if (savedInstanceState == null) {
             loadUserDetails();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        userDetailsPresenter.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        userDetailsPresenter.pause();
     }
 
     @Override
@@ -108,9 +113,10 @@ public class UserDetailsFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getUserDetailsUseCase.dispose();
+        userDetailsPresenter.destroy();
     }
 
+    @Override
     public void renderUser(UserModel user) {
         if (user != null) {
             iv_cover.setImageUrl(user.getCoverUrl());
@@ -121,24 +127,34 @@ public class UserDetailsFragment extends BaseFragment {
         }
     }
 
+    @Override
     public void showLoading() {
         rl_progress.setVisibility(View.VISIBLE);
         getActivity().setProgressBarIndeterminateVisibility(true);
     }
 
+    @Override
     public void hideLoading() {
         rl_progress.setVisibility(View.GONE);
         getActivity().setProgressBarIndeterminateVisibility(false);
     }
 
+    @Override
     public void showRetry() {
         rl_retry.setVisibility(View.VISIBLE);
     }
 
+    @Override
     public void hideRetry() {
-        this.rl_retry.setVisibility(View.GONE);
+        rl_retry.setVisibility(View.GONE);
     }
 
+    @Override
+    public void showError(String message) {
+        showToastMessage(message);
+    }
+
+    @Override
     public Context context() {
         return getActivity().getApplicationContext();
     }
@@ -147,9 +163,9 @@ public class UserDetailsFragment extends BaseFragment {
      * Load user details.
      */
     private void loadUserDetails() {
-        this.hideRetry();
-        this.showLoading();
-        this.getUserDetails(currentUserId());
+        if (userDetailsPresenter != null) {
+            userDetailsPresenter.initialize(currentUserId());
+        }
     }
 
     /**
@@ -164,40 +180,5 @@ public class UserDetailsFragment extends BaseFragment {
     @OnClick(R.id.bt_retry)
     void onButtonRetryClick() {
         UserDetailsFragment.this.loadUserDetails();
-    }
-
-    private void getUserDetails(int userId) {
-        this.getUserDetailsUseCase.execute(new UserDetailsObserver(), GetUserDetails.Params.forUser(userId));
-    }
-
-    private void showErrorMessage(ErrorBundle errorBundle) {
-        String errorMessage = ErrorMessageFactory.create(this.context(),
-                errorBundle.getException());
-        this.showToastMessage(errorMessage);
-    }
-
-    private void showUserDetailsInView(User user) {
-        final UserModel userModel = userModelDataMapper.transform(user);
-        renderUser(userModel);
-    }
-
-    private final class UserDetailsObserver extends DefaultObserver<User> {
-
-        @Override
-        public void onComplete() {
-            hideLoading();
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            hideLoading();
-            showErrorMessage(new DefaultErrorBundle((Exception) e));
-            showRetry();
-        }
-
-        @Override
-        public void onNext(User user) {
-            showUserDetailsInView(user);
-        }
     }
 }

@@ -61,6 +61,7 @@ android {
 }
 
 dependencies {
+    implementation project(':userlist')
     implementation project(':baselibrary')
 
     rootProject.ext.app_dependencies.each {

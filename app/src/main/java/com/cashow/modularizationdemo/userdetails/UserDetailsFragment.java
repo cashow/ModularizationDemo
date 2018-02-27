@@ -15,9 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cashow.modularizationdemo.R;
-import com.cashow.modularizationdemo.common.di.components.UserComponent;
-import com.cashow.modularizationdemo.common.fragment.BaseFragment;
-import com.cashow.modularizationdemo.common.model.UserModel;
+import com.cashow.modularizationdemo.UserComponent;
+import com.cashow.baselibrary.fragment.BaseFragment;
+import com.cashow.baselibrary.model.UserModel;
 import com.cashow.modularizationdemo.userdetails.widget.AutoLoadImageView;
 import com.fernandocejas.arrow.checks.Preconditions;
 

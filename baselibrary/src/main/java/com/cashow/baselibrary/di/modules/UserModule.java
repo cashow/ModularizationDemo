@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cashow.modularizationdemo;
+package com.cashow.baselibrary.di.modules;
 
-import com.cashow.baselibrary.BaseApplication;
+import dagger.Module;
 
 /**
- * Android Main Application
+ * Dagger module that provides user related collaborators.
  */
-public class AndroidApplication extends BaseApplication {
+@Module
+public class UserModule {
+
+    public UserModule() {
+    }
 }

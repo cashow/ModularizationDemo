@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.cashow.modularizationdemo.R;
-import com.cashow.modularizationdemo.common.activity.BaseActivity;
+import com.cashow.baselibrary.activity.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

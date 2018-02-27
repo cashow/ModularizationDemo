@@ -18,9 +18,9 @@ import android.widget.RelativeLayout;
 import com.cashow.modularizationdemo.R;
 import com.cashow.modularizationdemo.userlist.adapter.UsersAdapter;
 import com.cashow.modularizationdemo.userlist.adapter.UsersLayoutManager;
-import com.cashow.modularizationdemo.common.di.components.UserComponent;
-import com.cashow.modularizationdemo.common.fragment.BaseFragment;
-import com.cashow.modularizationdemo.common.model.UserModel;
+import com.cashow.modularizationdemo.UserComponent;
+import com.cashow.baselibrary.fragment.BaseFragment;
+import com.cashow.baselibrary.model.UserModel;
 
 import java.util.Collection;
 

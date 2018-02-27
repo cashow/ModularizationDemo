@@ -5,8 +5,8 @@
  */
 package com.cashow.modularizationdemo.userdetails;
 
-import com.cashow.modularizationdemo.common.model.UserModel;
-import com.cashow.modularizationdemo.common.view.LoadDataView;
+import com.cashow.baselibrary.model.UserModel;
+import com.cashow.baselibrary.view.LoadDataView;
 
 /**
  * Interface representing a View in a model view presenter (MVP) pattern.

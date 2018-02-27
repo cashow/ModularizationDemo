@@ -13,12 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cashow.modularizationdemo;
+package com.cashow.baselibrary;
 
-import com.cashow.baselibrary.BaseApplication;
+import com.cashow.domain.executor.PostExecutionThread;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
- * Android Main Application
+ * MainThread (UI Thread) implementation based on a {@link Scheduler}
+ * which will execute actions on the Android UI thread
  */
-public class AndroidApplication extends BaseApplication {
+@Singleton
+public class UIThread implements PostExecutionThread {
+
+    @Inject
+    UIThread() {
+    }
+
+    @Override
+    public Scheduler getScheduler() {
+        return AndroidSchedulers.mainThread();
+    }
 }

@@ -13,12 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cashow.modularizationdemo;
+package com.cashow.baselibrary.di.modules;
 
-import com.cashow.baselibrary.BaseApplication;
+import android.app.Activity;
+
+import com.cashow.baselibrary.di.PerActivity;
+
+import dagger.Module;
+import dagger.Provides;
 
 /**
- * Android Main Application
+ * A module to wrap the Activity state and expose it to the graph.
  */
-public class AndroidApplication extends BaseApplication {
+@Module
+public class ActivityModule {
+    private final Activity activity;
+
+    public ActivityModule(Activity activity) {
+        this.activity = activity;
+    }
+
+    /**
+     * Expose the activity to dependents in the graph.
+     */
+    @Provides
+    @PerActivity
+    Activity activity() {
+        return this.activity;
+    }
 }

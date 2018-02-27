@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cashow.modularizationdemo.R;
-import com.cashow.modularizationdemo.common.model.UserModel;
+import com.cashow.baselibrary.model.UserModel;
 
 import java.util.Collection;
 import java.util.Collections;

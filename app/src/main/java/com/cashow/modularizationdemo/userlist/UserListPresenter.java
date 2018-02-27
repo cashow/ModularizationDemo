@@ -22,11 +22,11 @@ import com.cashow.domain.exception.DefaultErrorBundle;
 import com.cashow.domain.exception.ErrorBundle;
 import com.cashow.domain.interactor.DefaultObserver;
 import com.cashow.domain.interactor.GetUserList;
-import com.cashow.modularizationdemo.common.di.PerActivity;
-import com.cashow.modularizationdemo.common.exception.ErrorMessageFactory;
-import com.cashow.modularizationdemo.common.mapper.UserModelDataMapper;
-import com.cashow.modularizationdemo.common.model.UserModel;
-import com.cashow.modularizationdemo.common.presenter.Presenter;
+import com.cashow.baselibrary.di.PerActivity;
+import com.cashow.baselibrary.exception.ErrorMessageFactory;
+import com.cashow.baselibrary.mapper.UserModelDataMapper;
+import com.cashow.baselibrary.model.UserModel;
+import com.cashow.baselibrary.presenter.Presenter;
 
 import java.util.Collection;
 import java.util.List;

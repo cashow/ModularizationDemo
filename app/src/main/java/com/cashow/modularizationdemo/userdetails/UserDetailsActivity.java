@@ -11,11 +11,11 @@ import android.view.Window;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.cashow.baselibrary.activity.BaseActivity;
+import com.cashow.baselibrary.di.HasComponent;
+import com.cashow.modularizationdemo.DaggerUserComponent;
 import com.cashow.modularizationdemo.R;
-import com.cashow.modularizationdemo.common.activity.BaseActivity;
-import com.cashow.modularizationdemo.common.di.HasComponent;
-import com.cashow.modularizationdemo.common.di.components.DaggerUserComponent;
-import com.cashow.modularizationdemo.common.di.components.UserComponent;
+import com.cashow.modularizationdemo.UserComponent;
 
 /**
  * Activity that shows details of a certain user.

@@ -15,21 +15,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.cashow.domain.User;
-import com.cashow.domain.exception.DefaultErrorBundle;
-import com.cashow.domain.exception.ErrorBundle;
-import com.cashow.domain.interactor.DefaultObserver;
-import com.cashow.domain.interactor.GetUserList;
 import com.cashow.modularizationdemo.R;
 import com.cashow.modularizationdemo.adapter.UsersAdapter;
 import com.cashow.modularizationdemo.adapter.UsersLayoutManager;
 import com.cashow.modularizationdemo.di.components.UserComponent;
-import com.cashow.modularizationdemo.exception.ErrorMessageFactory;
-import com.cashow.modularizationdemo.mapper.UserModelDataMapper;
 import com.cashow.modularizationdemo.model.UserModel;
+import com.cashow.modularizationdemo.presenter.UserListPresenter;
+import com.cashow.modularizationdemo.view.UserListView;
 
 import java.util.Collection;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -41,7 +35,7 @@ import butterknife.Unbinder;
 /**
  * Fragment that shows a list of Users.
  */
-public class UserListFragment extends BaseFragment {
+public class UserListFragment extends BaseFragment implements UserListView {
 
     /**
      * Interface for listening user list events.
@@ -51,10 +45,7 @@ public class UserListFragment extends BaseFragment {
     }
 
     @Inject
-    GetUserList getUserListUseCase;
-    @Inject
-    UserModelDataMapper userModelDataMapper;
-
+    UserListPresenter userListPresenter;
     @Inject
     UsersAdapter usersAdapter;
 
@@ -101,9 +92,22 @@ public class UserListFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        userListPresenter.setView(this);
         if (savedInstanceState == null) {
             this.loadUserList();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        userListPresenter.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        userListPresenter.pause();
     }
 
     @Override
@@ -116,7 +120,7 @@ public class UserListFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        this.getUserListUseCase.dispose();
+        userListPresenter.destroy();
     }
 
     @Override
@@ -125,42 +129,50 @@ public class UserListFragment extends BaseFragment {
         this.userListListener = null;
     }
 
+    @Override
     public void showLoading() {
         this.rl_progress.setVisibility(View.VISIBLE);
         this.getActivity().setProgressBarIndeterminateVisibility(true);
     }
 
+    @Override
     public void hideLoading() {
         this.rl_progress.setVisibility(View.GONE);
         this.getActivity().setProgressBarIndeterminateVisibility(false);
     }
 
+    @Override
     public void showRetry() {
-        this.rl_retry.setVisibility(View.VISIBLE);
+        rl_retry.setVisibility(View.VISIBLE);
     }
 
+    @Override
     public void hideRetry() {
-        this.rl_retry.setVisibility(View.GONE);
+        rl_retry.setVisibility(View.GONE);
     }
 
+    @Override
     public void renderUserList(Collection<UserModel> userModelCollection) {
         if (userModelCollection != null) {
             this.usersAdapter.setUsersCollection(userModelCollection);
         }
     }
 
+    @Override
     public void viewUser(UserModel userModel) {
-        if (this.userListListener != null) {
-            this.userListListener.onUserClicked(userModel);
+        if (userListListener != null) {
+            userListListener.onUserClicked(userModel);
         }
     }
 
+    @Override
     public void showError(String message) {
-        this.showToastMessage(message);
+        showToastMessage(message);
     }
 
+    @Override
     public Context context() {
-        return this.getActivity().getApplicationContext();
+        return getActivity().getApplicationContext();
     }
 
     private void setupRecyclerView() {
@@ -169,10 +181,11 @@ public class UserListFragment extends BaseFragment {
         this.rv_users.setAdapter(usersAdapter);
     }
 
+    /**
+     * Loads all users.
+     */
     private void loadUserList() {
-        this.hideRetry();
-        this.showLoading();
-        this.getUserList();
+        this.userListPresenter.initialize();
     }
 
     @OnClick(R.id.bt_retry)
@@ -182,44 +195,8 @@ public class UserListFragment extends BaseFragment {
 
     private UsersAdapter.OnItemClickListener onItemClickListener =
             userModel -> {
-                if (userModel != null) {
-                    viewUser(userModel);
+                if (UserListFragment.this.userListPresenter != null && userModel != null) {
+                    UserListFragment.this.userListPresenter.onUserClicked(userModel);
                 }
             };
-
-    private void showErrorMessage(ErrorBundle errorBundle) {
-        String errorMessage = ErrorMessageFactory.create(context(),
-                errorBundle.getException());
-        showError(errorMessage);
-    }
-
-    private void showUsersCollectionInView(Collection<User> usersCollection) {
-        final Collection<UserModel> userModelsCollection =
-                this.userModelDataMapper.transform(usersCollection);
-        renderUserList(userModelsCollection);
-    }
-
-    private void getUserList() {
-        this.getUserListUseCase.execute(new UserListObserver(), null);
-    }
-
-    private final class UserListObserver extends DefaultObserver<List<User>> {
-
-        @Override
-        public void onComplete() {
-            hideLoading();
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            hideLoading();
-            showErrorMessage(new DefaultErrorBundle((Exception) e));
-            showRetry();
-        }
-
-        @Override
-        public void onNext(List<User> users) {
-            showUsersCollectionInView(users);
-        }
-    }
 }

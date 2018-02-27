@@ -3,7 +3,7 @@
  *
  * @author Fernando Cejas (the android10 coder)
  */
-package com.cashow.modularizationdemo.userlist.adapter;
+package com.cashow.userlist.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.cashow.modularizationdemo.R;
 import com.cashow.baselibrary.model.UserModel;
+import com.cashow.userlist.R;
+import com.cashow.userlist.R2;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -92,7 +93,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     }
 
     static class UserViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.title)
+        @BindView(R2.id.title)
         TextView textViewTitle;
 
         UserViewHolder(View itemView) {

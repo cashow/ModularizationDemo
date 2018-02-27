@@ -3,7 +3,7 @@
  *
  * @author Fernando Cejas (the android10 coder)
  */
-package com.cashow.modularizationdemo.userlist;
+package com.cashow.userlist;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,12 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.cashow.modularizationdemo.R;
-import com.cashow.modularizationdemo.userlist.adapter.UsersAdapter;
-import com.cashow.modularizationdemo.userlist.adapter.UsersLayoutManager;
-import com.cashow.modularizationdemo.UserComponent;
 import com.cashow.baselibrary.fragment.BaseFragment;
 import com.cashow.baselibrary.model.UserModel;
+import com.cashow.userlist.adapter.UsersAdapter;
+import com.cashow.userlist.adapter.UsersLayoutManager;
 
 import java.util.Collection;
 
@@ -48,13 +46,13 @@ public class UserListFragment extends BaseFragment implements UserListView {
     @Inject
     UsersAdapter usersAdapter;
 
-    @BindView(R.id.rv_users)
+    @BindView(R2.id.rv_users)
     RecyclerView rv_users;
-    @BindView(R.id.rl_progress)
+    @BindView(R2.id.rl_progress)
     RelativeLayout rl_progress;
-    @BindView(R.id.rl_retry)
+    @BindView(R2.id.rl_retry)
     RelativeLayout rl_retry;
-    @BindView(R.id.bt_retry)
+    @BindView(R2.id.bt_retry)
     Button bt_retry;
 
     private Unbinder unbinder;
@@ -76,7 +74,7 @@ public class UserListFragment extends BaseFragment implements UserListView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(UserComponent.class).inject(this);
+        this.getComponent(UserListComponent.class).inject(this);
     }
 
     @Override
@@ -187,7 +185,7 @@ public class UserListFragment extends BaseFragment implements UserListView {
         this.userListPresenter.initialize();
     }
 
-    @OnClick(R.id.bt_retry)
+    @OnClick(R2.id.bt_retry)
     void onButtonRetryClick() {
         UserListFragment.this.loadUserList();
     }

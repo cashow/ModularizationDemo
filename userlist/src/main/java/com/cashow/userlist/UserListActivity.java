@@ -3,7 +3,7 @@
  *
  * @author Fernando Cejas (the android10 coder)
  */
-package com.cashow.modularizationdemo.userlist;
+package com.cashow.userlist;
 
 import android.os.Bundle;
 import android.view.Window;
@@ -12,18 +12,15 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cashow.baselibrary.activity.BaseActivity;
 import com.cashow.baselibrary.di.HasComponent;
 import com.cashow.baselibrary.model.UserModel;
-import com.cashow.modularizationdemo.DaggerUserComponent;
-import com.cashow.modularizationdemo.R;
-import com.cashow.modularizationdemo.UserComponent;
 
 /**
  * Activity that shows a list of Users.
  */
 @Route(path = "/userlist/activity")
-public class UserListActivity extends BaseActivity implements HasComponent<UserComponent>,
+public class UserListActivity extends BaseActivity implements HasComponent<UserListComponent>,
         UserListFragment.UserListListener {
 
-    private UserComponent userComponent;
+    private UserListComponent userComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +35,14 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
     }
 
     private void initializeInjector() {
-        this.userComponent = DaggerUserComponent.builder()
+        this.userComponent = DaggerUserListComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
                 .build();
     }
 
     @Override
-    public UserComponent getComponent() {
+    public UserListComponent getComponent() {
         return userComponent;
     }
 

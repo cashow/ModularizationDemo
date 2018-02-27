@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cashow.modularizationdemo;
+package com.cashow.userlist;
 
+import com.cashow.baselibrary.di.PerActivity;
 import com.cashow.baselibrary.di.components.ActivityComponent;
 import com.cashow.baselibrary.di.components.ApplicationComponent;
-import com.cashow.baselibrary.di.modules.UserModule;
 import com.cashow.baselibrary.di.modules.ActivityModule;
-import com.cashow.baselibrary.di.PerActivity;
-import com.cashow.modularizationdemo.userdetails.UserDetailsFragment;
-import com.cashow.userlist.UserListFragment;
+import com.cashow.baselibrary.di.modules.UserModule;
 
 import dagger.Component;
 
@@ -31,8 +29,6 @@ import dagger.Component;
  */
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, UserModule.class})
-public interface UserComponent extends ActivityComponent {
+public interface UserListComponent extends ActivityComponent {
     void inject(UserListFragment userListFragment);
-
-    void inject(UserDetailsFragment userDetailsFragment);
 }

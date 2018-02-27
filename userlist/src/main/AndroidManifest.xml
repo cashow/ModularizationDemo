@@ -1,2 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cashow.userlist" />
+    package="com.cashow.userlist">
+
+    <application>
+        <activity
+            android:name=".UserListActivity"
+            android:label="@string/activity_title_user_list"></activity>
+    </application>
+</manifest>

@@ -3,7 +3,7 @@
  *
  * @author Fernando Cejas (the android10 coder)
  */
-package com.cashow.modularizationdemo.userlist.adapter;
+package com.cashow.userlist.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;

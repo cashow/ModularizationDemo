@@ -3,7 +3,7 @@
  *
  * @author Fernando Cejas (the android10 coder)
  */
-package com.cashow.modularizationdemo.userlist;
+package com.cashow.userlist;
 
 import com.cashow.baselibrary.model.UserModel;
 import com.cashow.baselibrary.view.LoadDataView;

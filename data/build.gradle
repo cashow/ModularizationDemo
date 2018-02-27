@@ -43,15 +43,14 @@ android {
 }
 
 dependencies {
-    def dependencies = rootProject.ext.dependencies
-
     implementation project(':domain')
-    implementation dependencies.javaxInject
-    implementation dependencies.okHttp
-    implementation dependencies.gson
-    implementation dependencies.rxJava
-    implementation dependencies.rxAndroid
-    implementation dependencies.androidAnnotations
+
+    rootProject.ext.data_dependencies.each {
+        item -> implementation item
+    }
+    rootProject.ext.data_annotation_dependencies.each {
+        item -> annotationProcessor item
+    }
 }
 
 repositories {

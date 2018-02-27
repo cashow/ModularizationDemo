@@ -41,4 +41,37 @@ ext {
             androidAnnotations : "com.android.support:support-annotations:${androidAnnotationsVersion}",
             leakCanary         : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
     ]
+
+    app_dependencies = [
+            dependencies.dagger,
+            dependencies.butterKnife,
+            dependencies.recyclerView,
+            dependencies.rxJava,
+            dependencies.rxAndroid,
+            dependencies.arrow,
+            dependencies.leakCanary
+    ]
+    app_annotation_dependencies = [
+            dependencies.daggerCompiler,
+            dependencies.butterKnifeCompiler
+    ]
+
+    data_dependencies = [
+            dependencies.javaxInject,
+            dependencies.okHttp,
+            dependencies.gson,
+            dependencies.rxJava,
+            dependencies.rxAndroid,
+            dependencies.androidAnnotations,
+    ]
+    data_annotation_dependencies = [
+    ]
+
+    domain_dependencies = [
+            dependencies.javaxInject,
+            dependencies.rxJava,
+            dependencies.arrow,
+    ]
+    domain_annotation_dependencies = [
+    ]
 }

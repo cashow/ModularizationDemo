@@ -3,7 +3,7 @@
  *
  * @author Fernando Cejas (the android10 coder)
  */
-package com.cashow.modularizationdemo.userdetails;
+package com.cashow.userdetails;
 
 import android.os.Bundle;
 import android.view.Window;
@@ -13,22 +13,19 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cashow.baselibrary.activity.BaseActivity;
 import com.cashow.baselibrary.di.HasComponent;
-import com.cashow.modularizationdemo.DaggerUserComponent;
-import com.cashow.modularizationdemo.R;
-import com.cashow.modularizationdemo.UserComponent;
 
 /**
  * Activity that shows details of a certain user.
  */
 @Route(path = "/userdetail/activity")
-public class UserDetailsActivity extends BaseActivity implements HasComponent<UserComponent> {
+public class UserDetailsActivity extends BaseActivity implements HasComponent<UserDetailsComponent> {
 
     private static final String INSTANCE_STATE_PARAM_USER_ID = "org.android10.STATE_PARAM_USER_ID";
 
     @Autowired
     public int userId;
 
-    private UserComponent userComponent;
+    private UserDetailsComponent userComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +58,14 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
     }
 
     private void initializeInjector() {
-        this.userComponent = DaggerUserComponent.builder()
+        this.userComponent = DaggerUserDetailsComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
                 .build();
     }
 
     @Override
-    public UserComponent getComponent() {
+    public UserDetailsComponent getComponent() {
         return userComponent;
     }
 }

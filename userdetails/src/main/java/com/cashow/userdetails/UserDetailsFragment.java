@@ -3,7 +3,7 @@
  *
  * @author Fernando Cejas (the android10 coder)
  */
-package com.cashow.modularizationdemo.userdetails;
+package com.cashow.userdetails;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,11 +14,9 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.cashow.modularizationdemo.R;
-import com.cashow.modularizationdemo.UserComponent;
 import com.cashow.baselibrary.fragment.BaseFragment;
 import com.cashow.baselibrary.model.UserModel;
-import com.cashow.modularizationdemo.userdetails.widget.AutoLoadImageView;
+import com.cashow.userdetails.widget.AutoLoadImageView;
 import com.fernandocejas.arrow.checks.Preconditions;
 
 import javax.inject.Inject;
@@ -37,21 +35,21 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     @Inject
     UserDetailsPresenter userDetailsPresenter;
 
-    @BindView(R.id.iv_cover)
+    @BindView(R2.id.iv_cover)
     AutoLoadImageView iv_cover;
-    @BindView(R.id.tv_fullname)
+    @BindView(R2.id.tv_fullname)
     TextView tv_fullname;
-    @BindView(R.id.tv_email)
+    @BindView(R2.id.tv_email)
     TextView tv_email;
-    @BindView(R.id.tv_followers)
+    @BindView(R2.id.tv_followers)
     TextView tv_followers;
-    @BindView(R.id.tv_description)
+    @BindView(R2.id.tv_description)
     TextView tv_description;
-    @BindView(R.id.rl_progress)
+    @BindView(R2.id.rl_progress)
     RelativeLayout rl_progress;
-    @BindView(R.id.rl_retry)
+    @BindView(R2.id.rl_retry)
     RelativeLayout rl_retry;
-    @BindView(R.id.bt_retry)
+    @BindView(R2.id.bt_retry)
     Button bt_retry;
 
     private Unbinder unbinder;
@@ -71,7 +69,7 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getComponent(UserComponent.class).inject(this);
+        getComponent(UserDetailsComponent.class).inject(this);
     }
 
     @Override
@@ -176,7 +174,7 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
         return arguments.getInt(PARAM_USER_ID);
     }
 
-    @OnClick(R.id.bt_retry)
+    @OnClick(R2.id.bt_retry)
     void onButtonRetryClick() {
         UserDetailsFragment.this.loadUserDetails();
     }

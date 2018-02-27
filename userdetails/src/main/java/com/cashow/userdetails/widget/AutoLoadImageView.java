@@ -3,7 +3,7 @@
  *
  * @author Fernando Cejas (the android10 coder)
  */
-package com.cashow.modularizationdemo.userdetails.widget;
+package com.cashow.userdetails.widget;
 
 import android.app.Activity;
 import android.content.Context;

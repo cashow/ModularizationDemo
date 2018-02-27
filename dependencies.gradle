@@ -22,6 +22,8 @@ ext {
     okHttpVersion = '2.5.0'
     androidAnnotationsVersion = '26.1.0'
     arrowVersion = '1.0.0'
+    arouterApiVersion = '1.3.1'
+    arouterCompilerVersion = '1.1.4'
 
     //Development
     leakCanaryVersion = '1.3.1'
@@ -40,6 +42,8 @@ ext {
             gson               : "com.google.code.gson:gson:${gsonVersion}",
             androidAnnotations : "com.android.support:support-annotations:${androidAnnotationsVersion}",
             leakCanary         : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+            arouter            : "com.alibaba:arouter-api:${arouterApiVersion}",
+            arouterCompiler    : "com.alibaba:arouter-compiler:${arouterCompilerVersion}",
     ]
 
     app_dependencies = [
@@ -49,11 +53,13 @@ ext {
             dependencies.rxJava,
             dependencies.rxAndroid,
             dependencies.arrow,
-            dependencies.leakCanary
+            dependencies.leakCanary,
+            dependencies.arouter,
     ]
     app_annotation_dependencies = [
             dependencies.daggerCompiler,
-            dependencies.butterKnifeCompiler
+            dependencies.butterKnifeCompiler,
+            dependencies.arouterCompiler,
     ]
 
     data_dependencies = [

@@ -49,15 +49,6 @@ ext {
     ]
 
     app_dependencies = [
-            dependencies.dagger,
-            dependencies.butterKnife,
-            dependencies.recyclerView,
-            dependencies.rxJava,
-            dependencies.rxAndroid,
-            dependencies.arrow,
-            dependencies.leakCanary,
-            dependencies.arouter,
-            dependencies.supportV4,
     ]
     app_annotation_dependencies = [
             dependencies.daggerCompiler,
@@ -82,5 +73,22 @@ ext {
             dependencies.arrow,
     ]
     domain_annotation_dependencies = [
+    ]
+
+    baselibrary_dependencies = [
+            dependencies.dagger,
+            dependencies.butterKnife,
+            dependencies.recyclerView,
+            dependencies.rxJava,
+            dependencies.rxAndroid,
+            dependencies.arrow,
+            dependencies.leakCanary,
+            dependencies.arouter,
+            dependencies.supportV4,
+    ]
+    baselibrary_annotation_dependencies = [
+            dependencies.daggerCompiler,
+            dependencies.butterKnifeCompiler,
+            dependencies.arouterCompiler,
     ]
 }

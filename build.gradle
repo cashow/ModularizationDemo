@@ -12,6 +12,11 @@ buildscript {
 }
 
 allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+        google()
+    }
     ext {
         androidApplicationId = 'com.cashow.cleanmvpdemo'
         androidVersionCode = 1

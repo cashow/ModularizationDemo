@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cashow.userdetails" >
-    <application >
+    package="com.cashow.userdetails">
+
+    <application>
         <activity
             android:name=".UserDetailsActivity"
             android:label="@string/activity_title_user_details"></activity>

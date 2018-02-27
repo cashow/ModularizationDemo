@@ -1,4 +1,8 @@
-apply plugin: 'com.android.library'
+if (isRunAsApp.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 apply plugin: 'com.jakewharton.butterknife'
 
 android {
@@ -30,6 +34,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            if (isRunAsApp.toBoolean()) {
+                manifest.srcFile 'src/mdebug/AndroidManifest.xml'
+            }
         }
     }
 }

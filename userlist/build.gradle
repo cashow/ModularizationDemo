@@ -37,6 +37,13 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            if (isRunAsApp.toBoolean()) {
+                manifest.srcFile 'src/mdebug/AndroidManifest.xml'
+            }
+        }
+    }
 }
 
 dependencies {

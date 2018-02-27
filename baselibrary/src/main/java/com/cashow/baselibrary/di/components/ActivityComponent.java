@@ -13,12 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cashow.modularizationdemo;
+package com.cashow.baselibrary.di.components;
 
-import com.cashow.baselibrary.BaseApplication;
+import android.app.Activity;
+
+import com.cashow.baselibrary.di.PerActivity;
+import com.cashow.baselibrary.di.modules.ActivityModule;
+
+import dagger.Component;
 
 /**
- * Android Main Application
+ * A base component upon which fragment's components may depend.
+ * Activity-level components should extend this component.
+ *
+ * Subtypes of ActivityComponent should be decorated with annotation:
+ * {@link PerActivity}
  */
-public class AndroidApplication extends BaseApplication {
+@PerActivity
+@Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
+public interface ActivityComponent {
+    //Exposed to sub-graphs.
+    Activity activity();
 }

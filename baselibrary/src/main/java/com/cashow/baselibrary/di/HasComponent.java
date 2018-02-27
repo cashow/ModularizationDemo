@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cashow.modularizationdemo;
-
-import com.cashow.baselibrary.BaseApplication;
+package com.cashow.baselibrary.di;
 
 /**
- * Android Main Application
+ * Interface representing a contract for clients that contains a component for dependency injection.
  */
-public class AndroidApplication extends BaseApplication {
+public interface HasComponent<C> {
+    C getComponent();
 }

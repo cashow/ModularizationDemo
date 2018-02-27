@@ -5,8 +5,8 @@
  */
 package com.cashow.modularizationdemo.userlist;
 
-import com.cashow.modularizationdemo.common.model.UserModel;
-import com.cashow.modularizationdemo.common.view.LoadDataView;
+import com.cashow.baselibrary.model.UserModel;
+import com.cashow.baselibrary.view.LoadDataView;
 
 import java.util.Collection;
 

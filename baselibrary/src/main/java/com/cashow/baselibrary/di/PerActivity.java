@@ -13,12 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cashow.modularizationdemo;
+package com.cashow.baselibrary.di;
 
-import com.cashow.baselibrary.BaseApplication;
+import java.lang.annotation.Retention;
+
+import javax.inject.Scope;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Android Main Application
+ * A scoping annotation to permit objects whose lifetime should
+ * conform to the life of the activity to be memorized in the
+ * correct component.
  */
-public class AndroidApplication extends BaseApplication {
+@Scope
+@Retention(RUNTIME)
+public @interface PerActivity {
 }

@@ -9,12 +9,12 @@ import android.os.Bundle;
 import android.view.Window;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.cashow.baselibrary.activity.BaseActivity;
+import com.cashow.baselibrary.di.HasComponent;
+import com.cashow.baselibrary.model.UserModel;
+import com.cashow.modularizationdemo.DaggerUserComponent;
 import com.cashow.modularizationdemo.R;
-import com.cashow.modularizationdemo.common.activity.BaseActivity;
-import com.cashow.modularizationdemo.common.di.HasComponent;
-import com.cashow.modularizationdemo.common.di.components.DaggerUserComponent;
-import com.cashow.modularizationdemo.common.di.components.UserComponent;
-import com.cashow.modularizationdemo.common.model.UserModel;
+import com.cashow.modularizationdemo.UserComponent;
 
 /**
  * Activity that shows a list of Users.

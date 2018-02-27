@@ -83,6 +83,14 @@ ext {
             dependencies.arouterCompiler,
     ]
 
+    userdetails_dependencies = [
+    ]
+    userdetails_annotation_dependencies = [
+            dependencies.daggerCompiler,
+            dependencies.butterKnifeCompiler,
+            dependencies.arouterCompiler,
+    ]
+
     baselibrary_dependencies = [
             dependencies.dagger,
             dependencies.butterKnife,
